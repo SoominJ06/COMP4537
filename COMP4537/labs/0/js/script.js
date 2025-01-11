@@ -345,7 +345,7 @@ class UI {
      * Input validation to make sure only 3 - 7 buttons are generated.
      */
     validateInput(n) {
-        if (n >= 3 && n <= 7) {
+        if (!isNaN(n) && n >= 3 && n <= 7) {
             return true;
         } else {
             return false;
@@ -354,18 +354,17 @@ class UI {
 
     /**
      * Start game if input is valid, alert user if invalid.
-     * @param {*} e 
      */
     handleFormSubmit(e) {
         e.preventDefault(); // preventing default submit behavior
         const input = document.getElementById(grabNumOfButtons);
-        const n = parseInt(input.value);
+        const n = input.value;
         if (this.validateInput(n)) {
             this.game.startGame(n); // start game if input is valid
         } else {
             alert(messages.promptError); // alert user for valid input
         }
-    }   
+    } 
 }
   
 // Initialize the UI
