@@ -1,3 +1,39 @@
+// Id names and classnames
+const btnId = "btn_";
+const buttonsClassName = "buttons";
+const labelId = "label_"
+const labelString = "label";
+
+// Element names
+const createButtonElement = "button";
+const createPElement = "p";
+
+// Attributes
+const padWithPX = "px";
+const fullOpacity = "100%";
+const emptyString = "";
+const padWithZero = "0";
+const hexCodeHashtag = "#";
+
+// Display attributes
+const displayNone = "none";
+const displayFlex = "flex";
+const absolutePosition = "absolute";
+
+// Names of elements in document
+const grabWrap = "wrap";
+const grabGameWrap = "gameWrap";
+const grabPrompt = "prompt";
+const grabQuestion = "question";
+const grabSubmitButton = "submitButton";
+const grabGameForm = "gameForm";
+const grabNumOfButtons = "numOfButtons";
+
+// Event names
+const clickEvent = "click";
+const submitEvent = "submit";
+const domContentLoadedEvent = "DOMContentLoaded";
+
 class ButtonLabel {
     constructor(id, label) {
         this.id = id;
@@ -9,10 +45,10 @@ class ButtonLabel {
      * @returns 
      */
     createLabel() {
-        const pElement = document.createElement("p");
-        pElement.id = `label_${this.id}`;
-        pElement.classList.add("btn_label");
-        pElement.textContent = `${this.label}`
+        const pElement = document.createElement(createPElement);
+        pElement.id = labelId + this.id;
+        pElement.classList.add(btnId + labelString);
+        pElement.textContent = this.label
         return pElement;
     }
 
@@ -20,7 +56,7 @@ class ButtonLabel {
      * Hiding the label by setting its opacity to 0.
      */
     hideLabel() {
-        const me = document.getElementById(`label_${this.id}`);
+        const me = document.getElementById(labelId + this.id);
         me.style.opacity = 0;
     }
 
@@ -28,8 +64,8 @@ class ButtonLabel {
      * Displaying the label by setting its opacity to 100.
      */
     displayLabel() {
-        const me = document.getElementById(`label_${this.id}`);
-        me.style.opacity = `100%`;
+        const me = document.getElementById(labelId + this.id);
+        me.style.opacity = fullOpacity;
     }
 
 }
@@ -45,10 +81,10 @@ class Button {
      * Creates a new button element with its attributes, returns the newly made button element.
      */
     createButton() {
-        const button = document.createElement("button");
-        button.id = `btn_${this.id}`;
+        const button = document.createElement(createButtonElement);
+        button.id = btnId + this.id;
         button.style.backgroundColor = this.color;
-        button.classList.add("buttons");
+        button.classList.add(buttonsClassName);
         const label = this.number.createLabel(); // creating label and appending it to button
         button.append(label);  
         return button;
@@ -67,10 +103,10 @@ class Button {
      */
     setLocation(top, left) {
         this.setLocationAttribute(top, left);
-        const me = document.getElementById(`btn_${this.id}`);
-        me.style.position = "absolute";
-        me.style.top = `${this.top}px`;
-        me.style.left = `${this.left}px`;
+        const me = document.getElementById(btnId + this.id);
+        me.style.position = absolutePosition;
+        me.style.top = this.top + padWithPX;
+        me.style.left = this.left + padWithPX;
     }
 
     /**
@@ -84,10 +120,10 @@ class Button {
      * Moves this button in a random position.
      */
     moveRandomly() {
-        const me = document.getElementById(`btn_${this.id}`);
+        const me = document.getElementById(btnId + this.id);
 
         // Calculating the maximum left range by doing width of browser - width of button so that it doesn't go out of screen
-        const maxWidth = document.getElementById("wrap").clientWidth - me.clientWidth;
+        const maxWidth = document.getElementById(grabWrap).clientWidth - me.clientWidth;
         // Same logic as maxWidth, but for the maximum top range
         const maxHeight = window.innerHeight - me.clientHeight;
 
@@ -118,8 +154,8 @@ class Game {
      */
     resetGame() {
         this.resetAttributes();
-        document.getElementById("prompt").style.display = "none";
-        document.getElementById("gameWrap").innerHTML = "";
+        document.getElementById(grabPrompt).style.display = displayNone;
+        document.getElementById(grabGameWrap).innerHTML = emptyString;
     }
 
     /**
@@ -127,8 +163,8 @@ class Game {
      */
     endGame() {
         this.resetAttributes();
-        document.getElementById("prompt").style.display = "flex";
-        document.getElementById("gameWrap").innerHTML = "";
+        document.getElementById(grabPrompt).style.display = displayFlex;
+        document.getElementById(grabGameWrap).innerHTML = emptyString;
     }
 
     /**
@@ -141,7 +177,7 @@ class Game {
      * 4. Pad with leading zeros if necessary to make sure it's 6 characters long.
      */
     generateRandomColor() {
-        return `#${Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, '0')}`;
+        return hexCodeHashtag + Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, padWithZero);
     }
 
     /**
@@ -158,7 +194,7 @@ class Game {
      * Creating the button elements inside the game area.
      */
     displayButtons() {
-        const gameArea = document.getElementById("gameWrap");
+        const gameArea = document.getElementById(grabGameWrap);
         this.buttons.forEach((btn) => {
             gameArea.appendChild(btn.createButton());
         });
@@ -214,8 +250,8 @@ class Game {
      */
     makeButtonsClickable() {
         this.buttons.forEach((btn) => {
-            const buttonElement = document.getElementById(`btn_${btn.id}`);
-            buttonElement.addEventListener("click", () => this.handleButtonClick(btn));
+            const buttonElement = document.getElementById(btnId + btn.id);
+            buttonElement.addEventListener(clickEvent, () => this.handleButtonClick(btn));
         });
     }
 
@@ -223,7 +259,7 @@ class Game {
      * Removes clickability of a specific button.
      */
     removeClickability(button) {
-        const buttonElement = document.getElementById(`btn_${button.id}`);
+        const buttonElement = document.getElementById(btnId + button.id);
         buttonElement.disabled = true; // Disable the button
     }
 
@@ -298,11 +334,11 @@ class UI {
      */
     init() {
         // Display prompt ("How many buttons to create?")
-        document.getElementById("question").innerHTML = messages.inputPrompt; 
+        document.getElementById(grabQuestion).innerHTML = messages.inputPrompt; 
         // Display game start button ("Go!")
-        document.getElementById("submitButton").innerHTML = messages.gameStartBtn;
+        document.getElementById(grabSubmitButton).innerHTML = messages.gameStartBtn;
         // Add submit event to form
-        document.getElementById("gameForm").addEventListener("submit", (e) => this.handleFormSubmit(e)); 
+        document.getElementById(grabGameForm).addEventListener(submitEvent, (e) => this.handleFormSubmit(e)); 
     }
 
     /**
@@ -322,7 +358,7 @@ class UI {
      */
     handleFormSubmit(e) {
         e.preventDefault(); // preventing default submit behavior
-        const input = document.getElementById("numOfButtons");
+        const input = document.getElementById(grabNumOfButtons);
         const n = parseInt(input.value);
         if (this.validateInput(n)) {
             this.game.startGame(n); // start game if input is valid
@@ -333,6 +369,6 @@ class UI {
 }
   
 // Initialize the UI
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener(domContentLoadedEvent, () => {
     new UI();
 });
