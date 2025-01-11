@@ -1,0 +1,67 @@
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
+
+#wrap {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#prompt {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+#gameForm {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#numOfButtons, #submitButton {
+    border: 3px solid rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    font-size: 18px;
+}
+
+#numOfButtons {
+    padding: 10px 15px;
+}
+
+#submitButton {
+    padding: 10px 25px;
+    background-color: #50d77f;
+}
+
+.buttons {
+    all: unset;
+    width: 10em;
+    height: 5em;
+    border-radius: 10px;
+    border: 3px solid rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition-duration: 0.3s;
+}
+
+.btn_label {
+    font-size: 30px;
+    transition-duration: 0.3s;
+}
+
+#gameWrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    transition-duration: 0.3s;
+}
