@@ -11,7 +11,12 @@ class ReaderNotes {
         });
     }
 
+    clearAllNotes() {
+        document.getElementById("notesWrap").innerHTML = "";
+    }
+
     loadAllNotes() {
+        this.clearAllNotes();
         const existingNotes = this.notes.getAllNotes();
         existingNotes.forEach((note) => {
             const noteElement = this.createReaderNote(note);
