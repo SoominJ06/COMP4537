@@ -98,6 +98,7 @@ class WriterNotes {
         const noteIndex = parseInt(removeBtn.parentElement.id.split("_")[1], 10);
         this.notes.removeFromNotes(noteIndex);
         document.getElementById("notesWrap").innerHTML = ""; // Clear existing notes
+        this.updateTime();
         this.loadExistingNotes(); // Reinitialize notes
     }
     
@@ -107,6 +108,7 @@ class WriterNotes {
         this.notes.addToNotes("");
         const newNote = this.createWriterNote("", newNoteIndex);
         document.getElementById("notesWrap").appendChild(newNote);
+        this.updateTime();
     }
     
     handleNoteChange(textarea) {
