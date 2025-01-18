@@ -3,6 +3,12 @@ class ReaderNotes {
         this.notes = notes;
         this.time = this.getSavedTime();
         this.loadAllNotes();
+        // Listen for changes in localStorage to update notes in real-time
+        window.addEventListener("storage", (event) => {
+            if (event.key === "user_notes") {
+                this.updateNotes(); // Reload notes when user_notes changes
+            }
+        });
     }
 
     loadAllNotes() {
@@ -12,6 +18,11 @@ class ReaderNotes {
             document.getElementById("notesWrap").appendChild(noteElement);
         });
         this.insertTime(this.time); // Display the saved time (if any)
+    }
+
+    updateNotes() {
+        this.updateTime();
+        this.loadAllNotes(); // Reload the notes from localStorage
     }
 
     createReaderNote(content) {
