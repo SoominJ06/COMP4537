@@ -18,7 +18,7 @@ const emptyObj = "[]";
 
 // Names of elements in document
 const grabNotesWrap = "notesWrap";
-const grabTimeDisplay = "timeDisplay;"
+const grabTimeDisplay = "timeDisplay";
 const grabUpdatedTime = "updatedTime";
 const grabAddBtn = "addBtn";
 const grabTitle = "title";
