@@ -1,17 +1,21 @@
 /* Global settings */
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; }
-* {
-    /* Disabling scroll bar */
-    overflow-y: scroll;
-    -ms-overflow-style: none;
-    /* Internet Explorer 10+ */
-    scrollbar-width: none;
-    /* Firefox */
-    -webkit-scrollbar: none;
-}
 
 body {
     background-color: #1e1e22;
+}
+
+/* Customizing scroll bar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #1e1e22;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: #313145;
+    border-radius: 10px;
 }
 
 /* Styling shared elements */

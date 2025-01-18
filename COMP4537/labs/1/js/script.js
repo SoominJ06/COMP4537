@@ -3,7 +3,7 @@ class ReaderNotes {
         this.notes = notes;
         this.time = this.getSavedTime();
         this.loadAllNotes();
-        // Listen for changes in localStorage to update notes in real-time
+        // ChatGPT suggested using storage event listener to update the notes in real-time
         window.addEventListener("storage", (event) => {
             if (event.key === "user_notes") {
                 this.updateNotes(); // Reload notes when user_notes changes
