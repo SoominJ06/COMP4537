@@ -45,7 +45,7 @@ class InputValidator {
     }
 
     containsNumbers(value) {
-        return !/^[A-Za-z-' ]+$/.test(value);
+        return !/^[A-Za-z-' ,()]+$/.test(value);
     }
 
     validateInput(value) {
